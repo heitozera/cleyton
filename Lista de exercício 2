@@ -1,0 +1,53 @@
+#Quero enviar mensagens de bom dia para minha família de forma automatizada, rápida e fácil.
+
+#Mandar bom dia para a mãe
+mae = input("Deseja enviar bom dia para sua mãe? (s/n): ")
+if mae  == "s":
+    print("Bom dia, mamãe! Te amo demais! Que Deus abençoe seu dia! Dormiu bem?")
+else:
+    print("")
+#Mandar bom dia para o pai
+pai = input("Deseja enviar bom dia para seu pai? (s/n): ")
+if pai == "s":
+    print("Bom dia, painho! Te amo! Que seu dia seja abençoado por Deus! Como foi a noite?")
+else:
+    print("")
+#Mandar bom dia para o irmão
+irmao = input("Deseja enviar bom dia para seu irmão? (s/n): ")
+if irmao == "s":
+    nome = input("Qual é o nome dele?: ")
+    print("Bom dia, ",nome,", acordou novo?")
+else:
+    print("")
+#Mandar bom dia para a avó
+av = input("Deseja enviar bom dia para sua avó? (s/n): ")
+if av == "s":
+    print("Bom dia, vovó! Te amo demais! Que Papai do Céu ilumine seu dia! Teve um bom sono?")
+else:
+    print("")
+#Mandar bom dia para o avô
+vv = input ("Deseja enviar bom dia para seu avô? (s/n): ")
+if vv == "s":
+    print("Bom dia, vovô! Te amo! A graça de Deus esteja com o senhor! Como foi o descanso?")
+else:
+    print("")
+#Mandar bom dia para a tia
+tia = input ("Deseja enviar bom dia para sua tia? (s/n): ")
+if tia == "s":
+    nome_tia = input("Qual é o nome dela?: ")
+    print("Bom dia, tia", nome_tia,"! Como vai a senhora? Que Deus guie seu dia!")
+else:
+    print("")
+#Mandar bom dia para o tio
+tio = input ("Deseja enviar bom dia para seu tio? (s/n): ")
+if tio == "s":
+    nome_tio = input("Qual é o nome dele?: ")
+    print("Bom dia, tio", nome_tio,"! Como o senhor está? Que Deus vigie seu dia!")
+else:
+    print("")
+#Mandar bom dia para o grupo da família
+grupo = input("Deseja enviar bom dia para o grupo da família? (s/n): ")
+if grupo == "s":
+    print("Bom dia, família! Que o dia de vocês seja repleto de bençãos e alegrias! Amo todos vocês!")
+else: 
+    print("")
