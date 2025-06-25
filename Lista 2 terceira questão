@@ -1,0 +1,123 @@
+import json
+import os
+
+#Minha tarefa na empresa é produzir um protótipo de Lista de Tarefas (To do List)
+print("Seja bem-vindo ao To do List.")
+def AdicionarTarefa():
+    add_tarefa = input("Adicione uma tarefa (no máximo 80 caracteres): ")
+    if len(add_tarefa) > 80:
+         print("A tarefa precisa conter 80 caracteres ou menos, por favor reescreva")
+         return
+#Verifica se o arquivo já é existente
+    if os.path.exists('tarefas.json'):
+        with open ('tarefas.json', 'r') as file:
+            try:
+                afazer= json.load(file)
+            except json.JSONDecodeError:
+                afazer = []
+#Se o arquivo não existir, cria uma lista vazia              
+    else:
+        afazer = []
+    nova_tarefa = {
+        "tarefa": add_tarefa,
+        "status": "A fazer"
+    }
+    afazer.append(nova_tarefa)
+    with open('tarefas.json', 'w') as file:
+        json.dump(afazer, file, indent=4)
+    print("A tarefa entrará no status 'A fazer'.")
+    return nova_tarefa
+#Mostra a atividade com status "A fazer"
+if __name__ == "__main__":
+    AdicionarTarefa()
+
+#Passar a atividade para o status "Executando" com limite para 10 atividades nesse status
+def ExecutarTarefa():
+   alterar_status = input("Deseja mudar o status dessa atividade? (S/N): ")
+   if alterar_status.lower() == 's':
+        import json
+import os
+
+def ExecutarTarefa():
+    # Verifica se o arquivo existe e carrega as atividades
+    if os.path.exists('tarefas.json'):
+        with open('tarefas.json', 'r') as file:
+            try:
+                afazer = json.load(file)
+            except json.JSONDecodeError:
+                afazer = []
+    else:
+        afazer = []
+
+    # Verifica quantas atividades estão em execução
+    tarefas_executando = [tarefa for tarefa in afazer if tarefa['status'] == 'Executando']
+
+    if len(tarefas_executando) >= 10:
+        print("O máximo permitido são 10 atividades executando. Sua atividade vai voltar ao status inicial.")
+        return
+
+    # Procura a primeira atividade com status "A fazer" e muda para "Executando"
+    for tarefa in afazer:
+        if tarefa['status'] == 'A fazer':
+            tarefa['status'] = 'Executando'
+            print("Tarefa em execução. Hora de colocar a mão na massa!")
+            
+            # Salva a alteração
+            with open('tarefas.json', 'w') as file:
+                json.dump(afazer, file, indent=4)
+            return
+
+    print("Não há tarefas com status 'A fazer' no momento.")
+
+# Para rodar sozinho
+if __name__ == "__main__":
+    ExecutarTarefa()
+
+
+#Passar a atividade para o status "Pronta" ou para o status "Excluir"
+def ProntaOuExcluirTarefa():
+    alterar_status = input("Deseja mudar o status de alguma atividade? (S/N): ")
+    
+    if alterar_status.lower() != 's':
+        return
+
+    try:
+        with open('tarefas.json', 'r') as file:
+            afazeres = json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        print("Nenhuma tarefa encontrada.")
+        return
+
+    # Lista tarefas com índice
+    print("\nTarefas:")
+    for idx, tarefa in enumerate(afazeres):
+        print(f"{idx}: {tarefa['status']} - [{tarefa['status']}]")
+
+    try:
+        escolha = int(input("\nDigite o número da tarefa que deseja alterar: "))
+        if escolha < 0 or escolha >= len(afazeres):
+            print("Índice inválido.")
+            return
+    except ValueError:
+        print("Entrada inválida.")
+        return
+#Dá o status final da atividade
+    acao = input("Digite '1' para marcar como Pronta ou '2' para Excluir: ").lower()
+
+    if acao == '1':
+        afazeres[escolha]['status'] = 'Pronta'
+        print("A atividade em 'Executando' está pronta!")
+    elif acao == '2':
+        confirmacao = input("Tem certeza que deseja excluir essa tarefa? (S/N): ").lower()
+        if confirmacao == 's':
+            afazeres.pop(escolha)
+            print("A atividade em 'Executando' foi excluída com sucesso.")
+        else:
+            print("A atividade não será mais excluída.")
+    else:
+        print("Opção inválida! Selecione '1' ou '2'.")
+
+    # Salva as alterações
+    with open('tarefas.json', 'w') as file:
+        json.dump(afazeres, file, indent=4)
+#Atividade pronta ou excluída
